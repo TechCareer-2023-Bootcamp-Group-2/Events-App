@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eventsapp.webapi", "eventsapp.webapi\eventsapp.webapi.csproj", "{35C7BAC7-25DC-419B-9224-5D4E5D44FCC0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{35C7BAC7-25DC-419B-9224-5D4E5D44FCC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35C7BAC7-25DC-419B-9224-5D4E5D44FCC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35C7BAC7-25DC-419B-9224-5D4E5D44FCC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35C7BAC7-25DC-419B-9224-5D4E5D44FCC0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4D1C6405-488F-4969-9C8C-E242DD05D559}
+	EndGlobalSection
+EndGlobal
