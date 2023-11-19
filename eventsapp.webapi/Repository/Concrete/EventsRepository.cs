@@ -50,11 +50,6 @@ namespace eventsapp.webapi.Repository.Concrete
                 ticketPrice= 80.00f,
                 picturesUrl=new List<string>{ "https://example.com/rock_festival1.jpg","https://example.com/rock_festival2.jpg"}
             });
-            Console.WriteLine("Events are created");
-            Console.WriteLine("Events name:");
-            foreach(var item in _events){
-                Console.WriteLine(item.eventName);
-            }
         }
         public void Create(Events events)
         {
