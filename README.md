@@ -1,7 +1,7 @@
 # Events-App
 Events App
 
-# Start Project:
+# Starting WebApi Project:
 When terminal in main folder (Events-App) migrate dbase with this command:
 
 dotnet ef migrations add InitialCreate --context EventsDBContext --startup-project eventsapp.webapi --project eventsapp.dal
