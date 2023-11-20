@@ -134,6 +134,3 @@ project.lock.json
 .DS_Store
 *.pyc
 nupkg/
-
-eventsapp.webapi/obj
-eventsapp.webapi/bin
