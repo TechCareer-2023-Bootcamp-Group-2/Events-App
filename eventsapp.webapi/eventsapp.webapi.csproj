@@ -7,11 +7,9 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <ProjectReference Include="..\eventsapp.bll\eventsapp.bll.csproj" />
     <ProjectReference Include="..\eventsapp.dal\eventsapp.dal.csproj" />
-
+    <ProjectReference Include="..\eventsapp.entity\eventsapp.entity.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.13" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.2" />
@@ -25,7 +23,6 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="MySql.EntityFrameworkCore" Version="7.0.2" />
-    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="7.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 

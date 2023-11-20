@@ -1,4 +1,4 @@
-using eventsapp.webapi.Repository.Abstract;
+using eventsapp.dal.Abstract;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eventsapp.webapi.Controllers
@@ -17,14 +17,14 @@ namespace eventsapp.webapi.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var _events=_eventsRepository.GetAll().ToList();
+            var _events=_eventsRepository.GetAll();
             return Ok(_events);
         }
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var _events=_eventsRepository.GetById(id);
-            return _events == null ? NotFound() : Ok(_events);
+           // var _events=_eventsRepository.GetById(id);
+            return NotFound();
         }
 
     }

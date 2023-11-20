@@ -1,3 +1,5 @@
+using eventsapp.webapi.Extension;
+
 namespace eventsapp.webapi
 {
     public class Program
@@ -5,7 +7,8 @@ namespace eventsapp.webapi
         public static void Main(string[] args)
         {
             Console.WriteLine("App Running");
-            CreateHostBuilder(args).Build().Run();
+            CreateHostBuilder(args).Build().MigrateDatabase().Run();
+
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

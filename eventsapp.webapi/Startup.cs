@@ -1,6 +1,8 @@
-using eventsapp.webapi.Data;
-using eventsapp.webapi.Repository.Abstract;
-using eventsapp.webapi.Repository.Concrete;
+
+using eventsapp.dal.Abstract;
+using eventsapp.dal.Concrete;
+using eventsapp.dal.Data;
+using eventsapp.dal.Seed;
 using Microsoft.EntityFrameworkCore;
 
 namespace eventsapp.webapi
@@ -20,14 +22,21 @@ namespace eventsapp.webapi
             //Start with "builder." in program.cs, set here: 
             services.AddControllers();
             services.AddSwaggerGen();
-            services.AddTransient<IEventsRepository, EventsRepository>();
-            services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseMySQL(Configuration.GetConnectionString("default")));
+            services.AddDbContext<EventsDBContext>(options =>
+                                                        options.UseMySQL(
+                                                            Configuration.GetConnectionString("default")));
+            services.AddScoped<IEventsRepository, EventsRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            using (var scope = app.ApplicationServices.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                EventsTypesSeedData.Initialize(services);
+                EventsSeedData.Initialize(services);
+            }
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
