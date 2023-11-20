@@ -1,0 +1,11 @@
+E:\Work\GitHub\Events-App\eventsapp.bll\bin\Debug\net7.0\eventsapp.bll.deps.json
+E:\Work\GitHub\Events-App\eventsapp.bll\bin\Debug\net7.0\eventsapp.bll.dll
+E:\Work\GitHub\Events-App\eventsapp.bll\bin\Debug\net7.0\eventsapp.bll.pdb
+E:\Work\GitHub\Events-App\eventsapp.bll\obj\Debug\net7.0\eventsapp.bll.GeneratedMSBuildEditorConfig.editorconfig
+E:\Work\GitHub\Events-App\eventsapp.bll\obj\Debug\net7.0\eventsapp.bll.AssemblyInfoInputs.cache
+E:\Work\GitHub\Events-App\eventsapp.bll\obj\Debug\net7.0\eventsapp.bll.AssemblyInfo.cs
+E:\Work\GitHub\Events-App\eventsapp.bll\obj\Debug\net7.0\eventsapp.bll.csproj.CoreCompileInputs.cache
+E:\Work\GitHub\Events-App\eventsapp.bll\obj\Debug\net7.0\eventsapp.bll.dll
+E:\Work\GitHub\Events-App\eventsapp.bll\obj\Debug\net7.0\refint\eventsapp.bll.dll
+E:\Work\GitHub\Events-App\eventsapp.bll\obj\Debug\net7.0\eventsapp.bll.pdb
+E:\Work\GitHub\Events-App\eventsapp.bll\obj\Debug\net7.0\ref\eventsapp.bll.dll

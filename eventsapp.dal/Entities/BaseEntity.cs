@@ -1,4 +1,4 @@
-namespace eventsapp.entity{
+namespace eventsapp.data.Entities{
     public class BaseEntity
     {
         public int Id { get; set; }
