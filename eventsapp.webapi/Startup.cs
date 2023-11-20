@@ -1,5 +1,7 @@
+using eventsapp.webapi.Data;
 using eventsapp.webapi.Repository.Abstract;
 using eventsapp.webapi.Repository.Concrete;
+using Microsoft.EntityFrameworkCore;
 
 namespace eventsapp.webapi
 {
@@ -19,6 +21,8 @@ namespace eventsapp.webapi
             services.AddControllers();
             services.AddSwaggerGen();
             services.AddTransient<IEventsRepository, EventsRepository>();
+            services.AddDbContext<ApplicationDbContext>(options =>
+            options.UseMySQL(Configuration.GetConnectionString("default")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
