@@ -10,4 +10,8 @@ namespace eventsapp.dal.Configurations
         {
         }
     }
+
+    internal class EntityTypeConfiguration<T>
+    {
+    }
 }

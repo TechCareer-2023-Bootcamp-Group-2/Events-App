@@ -25,7 +25,7 @@ namespace eventsapp.dal.Seed
                EventType="Resim"
             });
             eventTypes.Add(new EventTypes{
-               EventType="Sinema"
+               EventType="Konser"
             });
            
             }

@@ -2,7 +2,8 @@ namespace eventsapp.entity
 {
     public class EventImages : BaseEntity
     {
-        public Events Event;
-        public string imageUrl;
+        //TODO: This class may save picture with Bit data type, not url !!!
+        public virtual Events Event {get; set;}
+        public string? imageUrl{get; set;}
     }
 }

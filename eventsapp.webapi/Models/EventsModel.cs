@@ -1,10 +1,10 @@
 namespace eventsapp.webapi.Models
 {
-    public class Events
+    public class EventsModel
     {
         public int Id{get; set;}
         public string ?EventName { get; set; }
-        public string ?Category { get; set; }
+        public string ?EventType { get; set; }
         public string ?Detail { get; set; }
         public DateTime StartTime {get;set;}
         public DateTime EndTime{get;set;}
@@ -13,7 +13,9 @@ namespace eventsapp.webapi.Models
         public string ?Adress{get;set;}
         public string ?GoogleMapsLink{get;set;}
         public float TicketPrice{get;set;}
-        //public List<string> PicturesUrl{get;set;}
+        public List<string> ImagesUrl{get;set;}
 
     }
+
+   
 }

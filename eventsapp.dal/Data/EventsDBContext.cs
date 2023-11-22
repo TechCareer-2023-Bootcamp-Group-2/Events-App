@@ -16,6 +16,12 @@ namespace eventsapp.dal.Data
         public DbSet<EventTypes> EventTypes {get;set;}
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            SetConfigurations(modelBuilder);
+        }
+
+        private static void SetConfigurations(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new EventsConfiguration());
         }
     }
 }

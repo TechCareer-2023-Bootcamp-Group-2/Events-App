@@ -22,10 +22,11 @@ namespace eventsapp.webapi
             //Start with "builder." in program.cs, set here: 
             services.AddControllers();
             services.AddSwaggerGen();
+            services.AddAutoMapper(typeof(Program));
             services.AddDbContext<EventsDBContext>(options =>
-                                                        options.UseMySQL(
+                                                        options.UseLazyLoadingProxies().UseMySQL(
                                                             Configuration.GetConnectionString("default")));
-            services.AddScoped<IEventsRepository, EventsRepository>();
+            services.AddTransient<IEventsRepository, EventsRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -34,7 +35,7 @@ namespace eventsapp.webapi
             using (var scope = app.ApplicationServices.CreateScope())
             {
                 var services = scope.ServiceProvider;
-                EventsTypesSeedData.Initialize(services);
+               // EventsTypesSeedData.Initialize(services);
                 EventsSeedData.Initialize(services);
             }
             if (env.IsDevelopment())

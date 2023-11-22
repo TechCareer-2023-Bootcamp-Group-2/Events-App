@@ -10,3 +10,8 @@ Then, enter eventsapp.webapi folder in terminal (cd eventsapp.webapi), type this
 
 dotnet build
 dotnet watch
+
+Drop for Database:
+dotnet ef database drop --context EventsDBContext --startup-project eventsapp.webapi --project eventsapp.dal
+Remove Migration:
+dotnet ef migrations remove --context EventsDBContext --startup-project eventsapp.webapi --project eventsapp.dal

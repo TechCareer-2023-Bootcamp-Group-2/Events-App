@@ -1,42 +1,78 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
+using eventsapp.dal.Data;
 using eventsapp.entity;
 using Microsoft.EntityFrameworkCore;
 using shopapp.data.Abstract;
 
 namespace eventsapp.dal.Abstract
 {
-    public class GenericRepository<TEntity> : IRepository<TEntity>
-        where TEntity : BaseEntity
+    public class GenericRepository<T, IdType> : IRepository<T, IdType>
+    where T : BaseEntity
+    where IdType : struct
     {
-        protected readonly DbContext context;
-        public GenericRepository(DbContext ctx)
+        protected readonly EventsDBContext _context;
+        private readonly DbSet<T> _dbSet;
+        public GenericRepository(EventsDBContext context)
         {
-            context = ctx;
-        }
-        public void Create(TEntity entity)
-        {
-            context.Set<TEntity>().Add(entity);
+            this._context = context;
+            this._dbSet = _context.Set<T>();
         }
 
-        public void Delete(TEntity entity)
+        public async Task AddAsync(T entity)
         {
-            context.Set<TEntity>().Remove(entity);
+            //await _context.Set<T>().AddAsync(entity);
+            // _context.Categories.AddAsync(entity);
+
+
+            await _dbSet.AddAsync(entity);
+            await _context.SaveChangesAsync();
         }
 
-        public List<TEntity> GetAll()
+        public async Task DeleteAsync(IdType id)
         {
-            return context.Set<TEntity>().ToList();
+            var entity = await this.GetAsync(id);
+            if (entity != null)
+            {
+                _context.Remove(entity);
+                await _context.SaveChangesAsync();
+            }
         }
 
-        public TEntity GetById(int id)
+        public async Task DeleteAsync(T entity)
         {
-            return context.Set<TEntity>().Find(id);
+            _context.Remove(entity);
+            await _context.SaveChangesAsync();
         }
 
-        public virtual void Update(TEntity entity)
+        public async Task<IEnumerable<T>> GetAsync()
         {
-            context.Entry(entity).State = EntityState.Modified;
+            return await _dbSet.ToListAsync();
+        }
+
+        public async Task<IEnumerable<T>> GetAsync(Expression<Func<T, bool>> exp)
+        {
+            return await _dbSet.Where(exp).ToListAsync();
+        }
+
+        public async Task<T> GetAsync(IdType id)
+        {
+            var entity = await _dbSet.FindAsync(id);
+            if (entity != null)
+                return entity;
+
+            throw new NotImplementedException();
+        }
+
+        public async Task<T> UpdateAsync(T entity)
+        {
+            _dbSet.Update(entity);
+            await _context.SaveChangesAsync();
+
+            return entity;
         }
     }
 }
