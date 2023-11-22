@@ -6,13 +6,13 @@ import AllEvents from "./pages/AllEvents";
 
 function App() {
   return (
-    <div>
+    <>
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route exact path="/" element={<HomePage />} />
         <Route path="/all-events" element={<AllEvents />} />
-        <Route path="/eventdetail" element={<EventDetail />} />
+        <Route path="/eventdetail/:eventId" element={<EventDetail />} />
       </Routes>
-    </div>
+    </>
   );
 }
 
