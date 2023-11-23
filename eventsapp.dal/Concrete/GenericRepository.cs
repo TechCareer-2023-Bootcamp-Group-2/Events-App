@@ -24,10 +24,6 @@ namespace eventsapp.dal.Abstract
 
         public async Task AddAsync(T entity)
         {
-            //await _context.Set<T>().AddAsync(entity);
-            // _context.Categories.AddAsync(entity);
-
-
             await _dbSet.AddAsync(entity);
             await _context.SaveChangesAsync();
         }
@@ -52,12 +48,6 @@ namespace eventsapp.dal.Abstract
         {
             return await _dbSet.ToListAsync();
         }
-
-        public async Task<IEnumerable<T>> GetAsync(Expression<Func<T, bool>> exp)
-        {
-            return await _dbSet.Where(exp).ToListAsync();
-        }
-
         public async Task<T> GetAsync(IdType id)
         {
             var entity = await _dbSet.FindAsync(id);
@@ -66,7 +56,6 @@ namespace eventsapp.dal.Abstract
 
             throw new NotImplementedException();
         }
-
         public async Task<T> UpdateAsync(T entity)
         {
             _dbSet.Update(entity);

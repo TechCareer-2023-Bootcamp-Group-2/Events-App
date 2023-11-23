@@ -9,8 +9,7 @@ namespace eventsapp.bll.Abstract
         Task<bool> DeleteAsync(int id);
         Task<bool> DeleteAsync(Events entity);
         Task<IEnumerable<Events>> GetAsync();
-        Task<IEnumerable<Events>> GetAsync(Expression<Func<Events, bool>> exp);
-        Task<Events> GetAsync(Events id);
+        Task<Events> GetAsync(int id);
         Task<bool> UpdateAsync(Events entity);
     }
 }

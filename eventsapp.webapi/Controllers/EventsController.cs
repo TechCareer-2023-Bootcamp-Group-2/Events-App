@@ -28,15 +28,13 @@ namespace eventsapp.webapi.Controllers
         public async Task<IActionResult> GetAll()
         {
             
-         
-
             return Ok(_mapper.Map<List<EventsModel>>(await _eventsService.GetAsync()));
         }
         [HttpPost]
 
         public async Task<IActionResult> Post(EventsCreateModel model){
             if(ModelState.IsValid){
-
+                Console.WriteLine(model.ImagesUrl[0]);
                 var newEvents=_mapper.Map<Events>(model);
                 await _eventsService.AddAsync(newEvents);
         

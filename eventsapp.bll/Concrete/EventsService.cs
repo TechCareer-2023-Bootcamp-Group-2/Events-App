@@ -17,9 +17,10 @@ namespace eventsapp.bll.Concrete
             return Validation(entity);
         }
 
-        public Task<bool> DeleteAsync(int id)
+        public async Task<bool> DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            await _unitofWork.EventsRepo.DeleteAsync(id);
+            return true;
         }
 
         public async Task<bool> DeleteAsync(Events entity)
@@ -33,14 +34,10 @@ namespace eventsapp.bll.Concrete
             return await _unitofWork.EventsRepo.GetAsync();
         }
 
-        public Task<IEnumerable<Events>> GetAsync(Expression<Func<Events, bool>> exp)
-        {
-            throw new NotImplementedException();
-        }
 
-        public Task<Events> GetAsync(Events id)
+        public async Task<Events> GetAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _unitofWork.EventsRepo.GetAsync(id);
         }
 
         public async Task<bool> UpdateAsync(Events entity)

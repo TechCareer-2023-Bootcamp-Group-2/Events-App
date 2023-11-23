@@ -14,7 +14,6 @@ namespace shopapp.data.Abstract
         Task DeleteAsync(IdType id);
         Task DeleteAsync(T entity);
         Task<IEnumerable<T>> GetAsync();
-        Task<IEnumerable<T>> GetAsync(Expression<Func<T, bool>> exp);
         Task<T> GetAsync(IdType id);
         Task<T> UpdateAsync(T entity);
     }
