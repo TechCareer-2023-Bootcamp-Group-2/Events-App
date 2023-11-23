@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\eventsapp.entity\eventsapp.entity.csproj" />
+    <ProjectReference Include="..\eventsapp.dal\eventsapp.dal.csproj" />
+  </ItemGroup>
+
 </Project>

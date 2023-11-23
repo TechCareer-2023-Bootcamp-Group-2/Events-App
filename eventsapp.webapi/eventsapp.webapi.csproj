@@ -8,6 +8,7 @@
   
   <ItemGroup>
     <ProjectReference Include="..\eventsapp.dal\eventsapp.dal.csproj" />
+    <ProjectReference Include="..\eventsapp.bll\eventsapp.bll.csproj" />
     <ProjectReference Include="..\eventsapp.entity\eventsapp.entity.csproj" />
   </ItemGroup>
   <ItemGroup>
