@@ -4,6 +4,6 @@ namespace eventsapp.dal.Abstract
     {
         IEventsRepository EventsRepo{get;}
         IEventTypesRepitory EventTypesRepo{get;}
-        void Save();
+     
     }
 }

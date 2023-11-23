@@ -14,9 +14,6 @@ namespace eventsapp.dal.Concrete
         public IEventsRepository EventsRepo=>_eventsRepository=_eventsRepository??new EventsRepository(_ctx);
         public IEventTypesRepitory EventTypesRepo=>_eventTypesRepository=_eventTypesRepository??new EventTypesRepository(_ctx);
 
-        public void Save()
-        {
-            throw new System.NotImplementedException();
-        }
+        
     }
 }

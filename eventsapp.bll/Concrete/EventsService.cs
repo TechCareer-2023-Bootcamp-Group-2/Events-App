@@ -1,11 +1,14 @@
 using System.Linq.Expressions;
 using eventsapp.bll.Abstract;
+using eventsapp.dal.Abstract;
 using eventsapp.entity;
 
 namespace eventsapp.bll.Concrete
 {
     public class EventsService : IEventsService
     {
+        private IUnitOfWork _unitofWork;
+        public EventsService(IUnitOfWork unitOfWork)=>_unitofWork=unitOfWork;
         public string ErrorMessage{ get; set;}
 
         public Task<bool> AddAsync(Events entity)
