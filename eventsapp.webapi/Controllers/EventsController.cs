@@ -41,6 +41,22 @@ namespace eventsapp.webapi.Controllers
             }
             return Ok(HttpStatusCode.BadRequest);
         }
+        [HttpPut("{id}")]
+
+        public async Task<IActionResult> PutEvents(int id,EventsCreateModel model)
+        {
+            Events events;
+            try{
+                events=await _eventsService.GetAsync(id);
+            }catch(Exception e){
+                Console.WriteLine("error: "+e.Message);
+                return Ok(HttpStatusCode.BadRequest);
+            }
+            Console.WriteLine("No error");
+            events=_mapper.Map(model,events);
+            await _eventsService.UpdateAsync(events);
+            return Ok();
+        }
 
     }
    

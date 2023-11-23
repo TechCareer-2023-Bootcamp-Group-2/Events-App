@@ -23,7 +23,7 @@ namespace eventsapp.webapi.Mapper
             {
                 dest.Images = new List<EventImages>();
                 foreach (var item in src.ImagesUrl)
-                    dest.Images.Add(new EventImages{imageUrl="NONE"});
+                    dest.Images.Add(new EventImages{imageUrl=item});
                     //TODO change imageUrl
             }
             );
