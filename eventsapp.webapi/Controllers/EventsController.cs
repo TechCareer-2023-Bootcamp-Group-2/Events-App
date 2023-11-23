@@ -1,5 +1,6 @@
 using System.Net;
 using AutoMapper;
+using eventsapp.bll.Abstract;
 using eventsapp.dal.Abstract;
 using eventsapp.entity;
 using eventsapp.webapi.Models;
@@ -14,13 +15,13 @@ namespace eventsapp.webapi.Controllers
 
     public class EventsController : ControllerBase
     {
-        private IEventsRepository _eventsRepository;
+        private IEventsService _eventsService;
 
         private readonly IMapper _mapper;
-        public EventsController(IEventsRepository eventsRepository, IMapper mapper)
+        public EventsController(IEventsService eventsService, IMapper mapper)
         {
             this._mapper = mapper;
-            this._eventsRepository = eventsRepository;
+            this._eventsService = eventsService;
         }
 
         [HttpGet]
@@ -29,7 +30,7 @@ namespace eventsapp.webapi.Controllers
             
          
 
-            return Ok(_mapper.Map<List<EventsModel>>(await _eventsRepository.GetAsync()));
+            return Ok(_mapper.Map<List<EventsModel>>(await _eventsService.GetAsync()));
         }
         [HttpPost]
 
@@ -37,7 +38,7 @@ namespace eventsapp.webapi.Controllers
             if(ModelState.IsValid){
 
                 var newEvents=_mapper.Map<Events>(model);
-                await _eventsRepository.AddAsync(newEvents);
+                await _eventsService.AddAsync(newEvents);
         
             }
             return Ok(HttpStatusCode.BadRequest);

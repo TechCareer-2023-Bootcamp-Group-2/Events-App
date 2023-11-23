@@ -1,4 +1,6 @@
 
+using eventsapp.bll.Abstract;
+using eventsapp.bll.Concrete;
 using eventsapp.dal.Abstract;
 using eventsapp.dal.Concrete;
 using eventsapp.dal.Data;
@@ -26,7 +28,8 @@ namespace eventsapp.webapi
             services.AddDbContext<EventsDBContext>(options =>
                                                         options.UseLazyLoadingProxies().UseMySQL(
                                                             Configuration.GetConnectionString("default")));
-            services.AddTransient<IEventsRepository, EventsRepository>();
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<IEventsService,EventsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
