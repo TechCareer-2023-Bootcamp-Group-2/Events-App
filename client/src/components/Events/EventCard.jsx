@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 
 const EventCard = ({ item }) => {
   return (
-    <div className="w-full md:w-[300px] lg:w-[400px] lg:[350px] h-auto flex flex-col bg-white my-3 mx-auto rounded-md
-    shadow-lg shadow-black/[0.1]"
+    <div className="w-full md:w-[300px] lg:w-[320px] h-auto flex flex-col bg-white my-3 mx-auto rounded-md
+      shadow-lg shadow-black/[0.1]"
     >
       <img src={item.image} alt={item.title} className="rounded-md h-[200px] w-full object-cover" />
       <div className="flex justify-between mx-5 my-5">
@@ -23,10 +23,10 @@ const EventCard = ({ item }) => {
       <div className="flex justify-between items-center mx-5 mb-5">
         <Link to={`/eventdetail/${item.id}`} className="underline cursor-pointer hover:text-purple-700">Details</Link>
         <div className="flex gap-x-3">
-          <FaFacebookF className="hover:text-purple-700 cursor-pointer" />
-          <FaTwitter className="hover:text-purple-700 cursor-pointer" />
-          <FaInstagram className="hover:text-purple-700 cursor-pointer" />
-          <FaLinkedinIn className="hover:text-purple-700 cursor-pointer" />
+          <FaFacebookF className="hover:text-purple-700 cursor-pointer text-purple-700 md:text-black " />
+          <FaTwitter className="hover:text-purple-700 cursor-pointer text-purple-700 md:text-black" />
+          <FaInstagram className="hover:text-purple-700 cursor-pointer text-purple-700 md:text-black" />
+          <FaLinkedinIn className="hover:text-purple-700 cursor-pointer text-purple-700 md:text-black" />
         </div>
       </div>
     </div>

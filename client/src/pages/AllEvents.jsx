@@ -3,6 +3,8 @@ import Header from "../components/Header/Header";
 import CustomTitle from "../components/CustomTitle/CustomTitle";
 import Events from "../components/Events/Events";
 import CategoryButton from "../components/CategoryButton/CategoryButton";
+import Footer from "../components/Footer/Footer";
+import EventSearch from "../components/EventSearch/EventSearch";
 
 const slides = [
   {
@@ -58,30 +60,16 @@ const categories = [
 
 const AllEvents = () => {
   const [filtered, setFiltered] = useState([]); 
+  const [search, setSearch] = useState([]); 
 
   return (
     <div className="m-0">
       <Header />
-      <div className="mt-24">
-        <div className="bg-black">
-          <img
-            src="https://img.freepik.com/free-photo/back-view-crowd-fans-watching-live-performance-music-concert-night-copy-space_637285-544.jpg?w=1380&t=st=1700555106~exp=1700555706~hmac=de7fbdcfc423b4a52abb584c5075be0c92c9c05515c1689047c1f4287957518d"
-            alt=""
-            className="w-full h-[600px] object-cover opacity-70"
-          />
-          <div className="flex flex-col absolute top-1/2 left-20">
-            <span className="text-white text-3xl mb-5">All Events</span>
-            <span className="text-white text-2xl">
-              Home{" "}
-              <span className="text-purple-500 font-extrabold text-2xl">
-                {"> All Events"}
-              </span>
-            </span>
-          </div>
-        </div>
+      <div className="mt-12">
         <div className="md:px-[80px]">
-          <CustomTitle borderedTitle={"All Event"} title={"Popular Event"} />
+          <CustomTitle borderedTitle={"All Event"} />
         </div>
+        <EventSearch setSearch={setSearch} />
         <div className="flex justify-center">
           <CategoryButton
             categories={categories}
@@ -90,9 +78,10 @@ const AllEvents = () => {
           />
         </div>
         <div className="flex justify-center">
-          <Events filtered={filtered} />
+          <Events filtered={filtered} search={search} />
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
