@@ -30,6 +30,7 @@ namespace eventsapp.webapi
                                                             Configuration.GetConnectionString("default")));
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IEventsService,EventsService>();
+            services.AddTransient<IEventTypesService,EventTypesService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
