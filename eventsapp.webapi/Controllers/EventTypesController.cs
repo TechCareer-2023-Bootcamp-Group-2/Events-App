@@ -1,5 +1,8 @@
+using System.Net;
 using AutoMapper;
 using eventsapp.bll.Abstract;
+using eventsapp.entity;
+using eventsapp.webapi.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eventsapp.webapi.Controllers
@@ -19,9 +22,18 @@ namespace eventsapp.webapi.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            
-            return Ok("Category");
-            //return Ok(_mapper.Map<List<EventsModel>>(await _eventsService.GetAsync()));
+            return Ok(_mapper.Map<List<EventTypesModel>>(await _eventTypesService.GetAsync()));
+        }
+
+        [HttpPost]
+
+        public async Task<IActionResult> Post(EventTypesCreateModel model){
+            if(ModelState.IsValid){
+                var newEventType=_mapper.Map<EventTypes>(model);
+                await _eventTypesService.AddAsync(newEventType);
+        
+            }
+            return Ok(HttpStatusCode.BadRequest);
         }
     }
 }
