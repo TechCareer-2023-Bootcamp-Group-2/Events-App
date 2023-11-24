@@ -11,5 +11,7 @@ namespace eventsapp.bll.Abstract
         Task<IEnumerable<Events>> GetAsync();
         Task<Events> GetAsync(int id);
         Task<bool> UpdateAsync(Events entity);
+        Task<IEnumerable<Events>> GetPopularAsync();
+        Task<IEnumerable<Events>> GetByEventTypeAsync(string eventType);
     }
 }

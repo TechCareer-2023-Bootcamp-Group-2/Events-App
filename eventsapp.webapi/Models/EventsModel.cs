@@ -12,6 +12,7 @@ namespace eventsapp.webapi.Models
         public string ?City{get;set;}
         public string ?Adress{get;set;}
         public string ?GoogleMapsLink{get;set;}
+        public bool isPopular {get;set;}
         public float TicketPrice{get;set;}
         public List<string> ImagesUrl{get;set;}
 

@@ -51,5 +51,16 @@ namespace eventsapp.bll.Concrete
             var isValid=true;
             return isValid;
         }
+
+        public async Task<IEnumerable<Events>> GetPopularAsync()
+        {
+            return await _unitofWork.EventsRepo.GetPopularAsync();
+        }
+
+        public async Task<IEnumerable<Events>> GetByEventTypeAsync(string eventTypeName)
+        {
+            EventTypes eventType=await _unitofWork.EventTypesRepo.GetByEventTypeNameAsync(eventTypeName);
+            return await _unitofWork.EventsRepo.GetByEventTypeAsync(eventType);
+        }
     }
 }

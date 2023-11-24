@@ -14,6 +14,7 @@ namespace eventsapp.entity
         public string? Adress { get; set; }
         public string? GoogleMapsLink { get; set; }
         public float? TicketPrice { get; set; }
+        public bool? isPopular {get;set;}
         public virtual ICollection<EventImages>? Images { get; set; }
         public virtual EventTypes? EventType
         {

@@ -15,7 +15,7 @@ namespace eventsapp.dal.Abstract
     where IdType : struct
     {
         protected readonly EventsDBContext _context;
-        private readonly DbSet<T> _dbSet;
+        protected readonly DbSet<T> _dbSet;
         public GenericRepository(EventsDBContext context)
         {
             this._context = context;

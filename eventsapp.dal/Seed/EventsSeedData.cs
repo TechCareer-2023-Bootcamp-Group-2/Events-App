@@ -42,6 +42,7 @@ namespace eventsapp.dal.Seed
                     Adress = "İstiklal Caddesi No:123, Beyoğlu",
                     GoogleMapsLink = "https://maps.google.com/?q=41.034,28.985",
                     TicketPrice = 50.00f,
+                    isPopular=true,
                     Images=new List<EventImages>{new EventImages{imageUrl="https://example.com/hamlet1.jpg"},
                     new EventImages{imageUrl="https://example.com/hamlet2.jpg"},},
                     //PicturesUrl=new List<string>{ "https://example.com/hamlet1.jpg", "https://example.com/hamlet2.jpg"}
@@ -58,6 +59,7 @@ namespace eventsapp.dal.Seed
                     Adress = "Sanat Sokak No:45, Çankaya",
                     GoogleMapsLink = "https://maps.google.com/?q=39.933,32.866",
                     TicketPrice = 20.00f,
+                    isPopular=true,
                     Images=new List<EventImages>{new EventImages{imageUrl="https://example.com/osman_hamdi1.jpg"},
                     new EventImages{imageUrl="https://example.com/osman_hamdi2.jpg"},},
                     //PicturesUrl=new List<string>{ "https://example.com/osman_hamdi1.jpg", "https://example.com/osman_hamdi2.jpg"}
@@ -75,6 +77,7 @@ namespace eventsapp.dal.Seed
                     Adress = "Kordon Boyu,Alsancak",
                     GoogleMapsLink = "https://maps.google.com/?q=38.418,27.128",
                     TicketPrice= 80.00f,
+                    isPopular=false,
                     Images=new List<EventImages>{new EventImages{imageUrl="https://example.com/rock_festival1.jpg"},
                     new EventImages{imageUrl="https://example.com/rock_festival2.jpg"},},
                     //PicturesUrl=new List<string>{ "https://example.com/rock_festival1.jpg","https://example.com/rock_festival2.jpg"}

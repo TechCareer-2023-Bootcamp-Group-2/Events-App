@@ -13,5 +13,15 @@ namespace eventsapp.dal.Concrete
         public EventsRepository(EventsDBContext ctx) : base(ctx)
         {
         }
+
+        public async Task<IEnumerable<Events>> GetByEventTypeAsync(EventTypes eventTypes)
+        {
+            return await _dbSet.Where(e=>e.EventType==eventTypes).ToListAsync();
+        }
+
+        public async Task<IEnumerable<Events>> GetPopularAsync()
+        {
+            return await _dbSet.Where(e=>e.isPopular==true).ToListAsync();
+        }
     }
 }

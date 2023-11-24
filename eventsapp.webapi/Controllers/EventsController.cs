@@ -30,6 +30,17 @@ namespace eventsapp.webapi.Controllers
             
             return Ok(_mapper.Map<List<EventsModel>>(await _eventsService.GetAsync()));
         }
+
+        [HttpGet("Popular")]
+        public async Task<IActionResult> GetPopular()
+        {
+            return Ok(_mapper.Map<List<EventsModel>>(await _eventsService.GetPopularAsync()));
+        }
+        [HttpGet("Category/{CategoryName}")]
+        public async Task<IActionResult> GetByEventType(string CategoryName)
+        {
+            return Ok(_mapper.Map<List<EventsModel>>(await _eventsService.GetByEventTypeAsync(CategoryName)));
+        }
         [HttpPost]
 
         public async Task<IActionResult> Post(EventsCreateModel model){
@@ -49,10 +60,8 @@ namespace eventsapp.webapi.Controllers
             try{
                 events=await _eventsService.GetAsync(id);
             }catch(Exception e){
-                Console.WriteLine("error: "+e.Message);
                 return Ok(HttpStatusCode.BadRequest);
             }
-            Console.WriteLine("No error");
             events=_mapper.Map(model,events);
             await _eventsService.UpdateAsync(events);
             return Ok();
