@@ -11,6 +11,7 @@ namespace eventsapp.webapi
 {
     public class Startup
     {
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -22,6 +23,15 @@ namespace eventsapp.webapi
         public void ConfigureServices(IServiceCollection services)
         {
             //Start with "builder." in program.cs, set here: 
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: "myOrigins", policy =>
+                {
+                    policy.AllowAnyOrigin(); // www.deneme.com
+                    policy.AllowAnyHeader();
+                    policy.AllowAnyMethod();
+                });
+            });
             services.AddControllers();
             services.AddSwaggerGen();
             services.AddAutoMapper(typeof(Program));
@@ -29,8 +39,8 @@ namespace eventsapp.webapi
                                                         options.UseLazyLoadingProxies().UseMySQL(
                                                             Configuration.GetConnectionString("default")));
             services.AddTransient<IUnitOfWork, UnitOfWork>();
-            services.AddTransient<IEventsService,EventsService>();
-            services.AddTransient<IEventTypesService,EventTypesService>();
+            services.AddTransient<IEventsService, EventsService>();
+            services.AddTransient<IEventTypesService, EventTypesService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,7 +49,7 @@ namespace eventsapp.webapi
             using (var scope = app.ApplicationServices.CreateScope())
             {
                 var services = scope.ServiceProvider;
-               // EventsTypesSeedData.Initialize(services);
+                // EventsTypesSeedData.Initialize(services);
                 EventsSeedData.Initialize(services);
             }
             if (env.IsDevelopment())
@@ -50,7 +60,10 @@ namespace eventsapp.webapi
             }
             //Start with "app." in program.cs, set here: 
             app.UseHttpsRedirection();
+            app.UseAuthentication();
             app.UseRouting();
+            app.UseCors("myOrigins");
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

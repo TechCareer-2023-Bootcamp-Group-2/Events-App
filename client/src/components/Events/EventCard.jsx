@@ -8,7 +8,7 @@ const EventCard = ({ item }) => {
     <div className="w-full md:w-[300px] lg:w-[320px] h-auto flex flex-col bg-white my-3 mx-auto rounded-md
       shadow-lg shadow-black/[0.1]"
     >
-      <img src={item.image} alt={item.title} className="rounded-md h-[200px] w-full object-cover" />
+      <img src={item.imagesUrl[0]} alt={item.eventName} className="rounded-md h-[200px] w-full object-cover" />
       <div className="flex justify-between mx-5 my-5">
         <div className="flex items-center">
           <IoCalendarOutline className="mr-2 text-purple-700" />
@@ -19,7 +19,7 @@ const EventCard = ({ item }) => {
           <span>Ankara, Turkey</span>
         </div>
       </div>
-      <span className="mx-5 text-[20px] mb-5">{item.title}</span>
+      <span className="mx-5 text-[20px] mb-5">{item.eventName}</span>
       <div className="flex justify-between items-center mx-5 mb-5">
         <Link to={`/eventdetail/${item.id}`} className="underline cursor-pointer hover:text-purple-700">Details</Link>
         <div className="flex gap-x-3">

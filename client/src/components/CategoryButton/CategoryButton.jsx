@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 
 const CategoryButton = ({ categories, setFiltered, events }) => {
-  const [categoryTitle, setCategoryTitle] = useState("All");
+  const [categoryTitle, setCategoryTitle] = useState("Tümü");
 
   useEffect(() => {
-    if (categoryTitle === "All") {
+    if (categoryTitle === "Tümü") {
       setFiltered(events);
     } else {
-      setFiltered(events.filter((item) => item.category === categoryTitle));
+      setFiltered(events.filter((item) => item.eventType === categoryTitle));
     }
   }, [events, categoryTitle, setFiltered]);
 

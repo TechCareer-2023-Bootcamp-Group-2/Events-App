@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import Header from "../components/Header/Header";
 //import Slider from "../components/Slider/Slider";
 import EventSearch from "../components/EventSearch/EventSearch";
@@ -45,24 +46,40 @@ const slides = [
   },
 ];
 
-const categories = [
+const categories 
+= [
   {
-    title: "All",
+    title: "Tümü",
   },
   {
-    title: "Concert",
+    title: "Tiyatro",
   },
   {
-    title: "Theater",
+    title: "Resim",
   },
   {
-    title: "Cinema",
+    title: "Konser",
   },
 ];
 
 const HomePage = () => {
+  const url="http://localhost:5271/api/Events";
   const [filtered, setFiltered] = useState([]);
+  const [events, setEvents] = useState([]);
   const [search, setSearch] = useState([]); 
+  useEffect(()=>{
+    const getEvents = async () => {
+      try {
+        axios.get(url).then((res)=>{
+          console.log(res.data);
+          setEvents(res.data);
+        })
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getEvents();
+  },[])
 
   return (
     <div className="m-0">
@@ -89,7 +106,7 @@ const HomePage = () => {
         <CategoryButton
           categories={categories}
           setFiltered={setFiltered}
-          events={slides}
+          events={events}
         />
       </div>
       <div className="flex justify-center mb-10">
