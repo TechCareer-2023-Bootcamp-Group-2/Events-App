@@ -1,10 +1,9 @@
 import React from 'react'
 
-const CustomTitle = ({borderedTitle, title}) => {
+const CustomTitle = ({borderedTitle}) => {
   return (
-    <div className='py-[10px] md:py-[20px]'>
-        <h1 className='ml-5 text-[50px] md:text-[100px] uppercase decoration-red-950 text-[#DDDDDD] select-none'>{borderedTitle}</h1>
-        <h1 className='text-center text-[30px] md:text-[60px] uppercase'>{title}</h1>
+    <div className='flex justify-center pt-[50px] pb-[20px] md:pt-10 md:pb-5 '>
+        <h1 className='text-[40px] sm:text-[50px] md:text-[75px] uppercase decoration-red-950 text-[#DDDDDD] select-none'>{borderedTitle}</h1>
     </div>
   )
 }

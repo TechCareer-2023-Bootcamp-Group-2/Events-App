@@ -1,18 +1,50 @@
-import { Button, DatePicker, Form, Input, Select } from "antd";
 import React from "react";
+import { Input, DatePicker, Switch } from "antd";
+//import { Button, DatePicker, Select } from "antd";
+import { SearchOutlined } from "@ant-design/icons";
 
-const EventSearch = () => {
+const { RangePicker } = DatePicker;
+
+const onChange = (checked) => {
+  console.log(`switch to ${checked}`);
+};
+
+const EventSearch = ({ setSearch }) => {
+  return (
+    <div className="w-full flex flex-col lg:flex-row lg:justify-between items-center gap-x-10 mb-5 px-10 sm:px-24 gap-y-3">
+      <div className="flex lg:flex-1 w-full">
+        <Input
+          size="large"
+          placeholder="Etkinlik Ara..."
+          prefix={<SearchOutlined />}
+          className="rounded-full w-full"
+          onChange={(e) => setSearch(e.target.value.toLowerCase())}
+        />
+      </div>
+      <div className="flex md:flex-1 flex-col md:flex-row justify-evenly items-center gap-y-3 lg:gap-y-0 gap-x-3">
+        <div className="flex items-center">
+          <span className="mr-3 hidden md:block">Tarih: </span>
+          <RangePicker />
+        </div>
+        <div className="flex items-center">
+          <span className="mr-3 ">Geçmiş Etkinlikler: </span>
+          <Switch defaultChecked={true} onChange={onChange} />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default EventSearch;
+
+/*
   const [form] = Form.useForm();
 
   const onFinish = (values) => {
     console.log(values);
   };
-  return (
-    <div
-      className="flex justify-center items-center mt-16 mx-5 md:mx-0 h-[250px] md:h-[100px] rounded-xl border border-purple-500 bg-white
-        shadow-2xl shadow-black/[0.1]"
-    >
-      <Form form={form} layout="inline" onFinish={onFinish} className="flex flex-col gap-y-5 md:flex-row md:gap-y-3 md:px-5">
+  
+<Form form={form} layout="inline" onFinish={onFinish} className="flex flex-col gap-y-5 md:flex-row md:gap-y-3 md:px-5">
         <Form.Item name={"location"} className="w-[250px] md:w-[200px]">
           <Input placeholder="locaiton.." size="large" />
         </Form.Item>
@@ -38,8 +70,5 @@ const EventSearch = () => {
           </Button>
         </Form.Item>
       </Form>
-    </div>
-  );
-};
 
-export default EventSearch;
+*/

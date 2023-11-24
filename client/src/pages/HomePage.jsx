@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import Header from "../components/Header/Header";
-import Slider from "../components/Slider/Slider";
+//import Slider from "../components/Slider/Slider";
 import EventSearch from "../components/EventSearch/EventSearch";
 import CustomTitle from "../components/CustomTitle/CustomTitle";
 import CategoryButton from "../components/CategoryButton/CategoryButton";
 import Events from "../components/Events/Events";
+import Footer from "../components/Footer/Footer";
+import { Carousel } from "antd";
 
 const slides = [
   {
@@ -59,43 +61,30 @@ const categories = [
 ];
 
 const HomePage = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [filtered, setFiltered] = useState([]);
-
-  // Slider Geri Butonu
-  const prevSlide = () => {
-    const isFirstSlide = currentIndex === 0;
-    const newIndex = isFirstSlide ? slides.length - 1 : currentIndex - 1;
-    setCurrentIndex(newIndex);
-  };
-  // Slider İleri Butonu
-  const nextSlide = () => {
-    const isLastSlide = currentIndex === slides.length - 1;
-    const newIndex = isLastSlide ? 0 : currentIndex + 1;
-    setCurrentIndex(newIndex);
-  };
-  // Alttaki noktalardan ilgili slide'a git func.
-  const goToSlide = (slideIndex) => {
-    setCurrentIndex(slideIndex);
-  };
+  const [search, setSearch] = useState([]); 
 
   return (
     <div className="m-0">
       <Header />
-      <div className="mt-40 md:mt-28 mb-10 md:mb-20 mx-5">
-        <h1 className="text-center font-bold md:font-extrabold text-2xl md:text-5xl">Populer Events</h1>
-        <Slider
-          slides={slides}
-          prevSlide={prevSlide}
-          nextSlide={nextSlide}
-          goToSlide={goToSlide}
-          currentIndex={currentIndex}
-        />
+      <div className="mt-12">
+        <CustomTitle borderedTitle={"Populer Events"} />
       </div>
-      <div className="md:px-[80px]">
-        <EventSearch />
-        <CustomTitle borderedTitle={"Event"} title={"Popular Event"} />
+      <Carousel autoplay className="px-3 md:px-20 lg:px-30 rounded-lg">
+        {slides.map((item) => (
+          <div className="h-[250px] sm:h-[400px] md:h-[500px] lg:h-[600px] rounded-lg bg-black" key={item.id}>
+            <img
+              src={item.image}
+              alt=""
+              className="w-full h-full object-cover rounded-lg opacity-70"
+            />
+          </div>
+        ))}
+      </Carousel>
+      <div>
+        <CustomTitle borderedTitle={"Events"} />
       </div>
+      <EventSearch setSearch={setSearch} />
       <div className="flex justify-center">
         <CategoryButton
           categories={categories}
@@ -103,9 +92,10 @@ const HomePage = () => {
           events={slides}
         />
       </div>
-      <div className="flex justify-center">
-        <Events filtered={filtered} />
+      <div className="flex justify-center mb-10">
+        <Events filtered={filtered} search={search} />
       </div>
+      <Footer />
     </div>
   );
 };
