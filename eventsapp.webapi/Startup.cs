@@ -41,6 +41,7 @@ namespace eventsapp.webapi
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IEventsService, EventsService>();
             services.AddTransient<IEventTypesService, EventTypesService>();
+            services.AddTransient<ICompaniesService, CompaniesService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
