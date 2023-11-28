@@ -52,6 +52,7 @@ namespace eventsapp.webapi
                 var services = scope.ServiceProvider;
                 // EventsTypesSeedData.Initialize(services);
                 EventsSeedData.Initialize(services);
+                CompaniesSeedData.Initialize(services);
             }
             if (env.IsDevelopment())
             {

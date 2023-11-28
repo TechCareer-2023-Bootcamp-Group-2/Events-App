@@ -15,6 +15,7 @@ namespace eventsapp.dal.Data
         public DbSet<EventImages> EventImages { get; set; }
         public DbSet<EventTypes> EventTypes { get; set; }
         public DbSet<Companies> Companies { get; set; }
+        public DbSet<SocialMedia> SocialMedia { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             SetConfigurations(modelBuilder);

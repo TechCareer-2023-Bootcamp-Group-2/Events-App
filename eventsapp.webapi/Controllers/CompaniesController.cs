@@ -36,5 +36,19 @@ namespace eventsapp.webapi.Controllers
             }
             return Ok(HttpStatusCode.Created);
         }
+
+        [HttpPatch("{id}")]
+        public async Task<IActionResult> Patch(int id, CompaniesCreateModel model)
+        {
+            Companies companies = await _companiesService.GetAsync(id);
+            if (companies == null)
+            {
+                return Ok(HttpStatusCode.BadRequest);
+            }
+
+            companies = _mapper.Map(model, companies);
+            await _companiesService.UpdateAsync(companies);
+            return Ok();
+        }
     }
 }
