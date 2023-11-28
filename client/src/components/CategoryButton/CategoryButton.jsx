@@ -15,11 +15,11 @@ const CategoryButton = ({ categories, setFiltered, events }) => {
     <ul className="grid grid-cols-4 md:flex md:flex-row gap-3 md:gap-x-6 mb-5">
       {categories.map((category, index) => (
         <li
-          className={`py-2 md:py-3 px-3 md:px-7 rounded-md cursor-pointer text-center hover:text-purple-700 ${category.title === categoryTitle && "text-purple-700 border border-purple-700"}`}
-          onClick={() => setCategoryTitle(category.title)}
+          className={`py-2 md:py-3 px-3 md:px-7 rounded-md cursor-pointer text-center hover:text-purple-700 ${category.eventType === categoryTitle && "text-purple-700 border border-purple-700"}`}
+          onClick={() => setCategoryTitle(category.eventType)}
           key={index}
         >
-          <span className="">{category.title}</span>
+          <span className="">{category.eventType}</span>
         </li>
       ))}
     </ul>

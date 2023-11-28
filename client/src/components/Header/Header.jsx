@@ -26,6 +26,9 @@ const Header = () => {
         <Link to={"/all-events"} className={`no-underline hover:text-red-500 ${pathname === "/all-events" && "text-purple-500"}`}>
           <span>All Events</span>
         </Link>
+        <Link to={"/dashboard"} className={`no-underline hover:text-red-500 ${pathname === "/dashboard" && "text-purple-500"}`}>
+          <span>Dashboard</span>
+        </Link>
       </div>
 
       {/* Mobil Ekran için menü butonu kısmı */}
@@ -41,6 +44,9 @@ const Header = () => {
             </Link>
             <Link to={"/all-events"} className={`block py-2 px-4 no-underline hover:text-red-500 ${pathname === "/all-events" && "text-purple-500"}`}>
               All Events
+            </Link>
+            <Link to={"/dashboard"} className={`block py-2 px-4 no-underline hover:text-red-500 ${pathname === "/dashboard" && "text-purple-500"}`}>
+              Dashboard
             </Link>
           </div>
         )}

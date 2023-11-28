@@ -12,11 +12,11 @@ const EventCard = ({ item }) => {
       <div className="flex justify-between mx-5 my-5">
         <div className="flex items-center">
           <IoCalendarOutline className="mr-2 text-purple-700" />
-          <span>21.07.2023</span>
+          <span>{item.startTime.substring(0, 10)}</span>
         </div>
         <div className="flex items-center">
           <IoLocationSharp className="mr-2 text-purple-700" />
-          <span>Ankara, Turkey</span>
+          <span>{item.city}, Türkiye</span>
         </div>
       </div>
       <span className="mx-5 text-[20px] mb-5">{item.eventName}</span>

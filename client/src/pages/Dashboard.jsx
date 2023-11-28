@@ -1,10 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import Header from "../components/Header/Header";
-import CustomTitle from "../components/CustomTitle/CustomTitle";
-import Events from "../components/Events/Events";
-import CategoryButton from "../components/CategoryButton/CategoryButton";
-import Footer from "../components/Footer/Footer";
-import EventSearch from "../components/EventSearch/EventSearch";
+import { Link } from "react-router-dom";
 
 const slides = [
   {
@@ -63,51 +59,27 @@ const slides = [
   },
 ];
 
-const categories = [
-  {
-    id: 1,
-    eventType: "Tümü",
-  },
-  {
-    id: 2,
-    eventType: "Tiyatro",
-  },
-  {
-    id: 3,
-    eventType: "Resim",
-  },
-  {
-    id: 4,
-    eventType: "Konser",
-  },
-];
-
-const AllEvents = () => {
-  const [filtered, setFiltered] = useState([]);
-  const [search, setSearch] = useState([]);
-
+const Dashboard = () => {
   return (
     <div className="m-0">
       <Header />
-      <div className="mt-12">
-        <div className="md:px-[80px]">
-          <CustomTitle borderedTitle={"All Event"} />
-        </div>
-        <EventSearch setSearch={setSearch} />
-        <div className="flex justify-center">
-          <CategoryButton
-            categories={categories}
-            setFiltered={setFiltered}
-            events={slides}
-          />
-        </div>
-        <div className="flex justify-center">
-          <Events filtered={filtered} search={search} />
+      <div className="mt-32 mx-40">
+        <div className="flex gap-x-5">
+          {slides.map((slide) => (
+            <div className="w-[200px] h-[300px]  border border-red-500 bg-gray-500">
+              <img
+                src={slide.imagesUrl[0]}
+                alt={slide.eventName}
+                className="object-cover w-full h-[150px]"
+              />
+              <h1>{slide.eventName}</h1>
+              <Link to={`/dashboard-detail/${slide.id}`}>Detail</Link>
+            </div>
+          ))}
         </div>
       </div>
-      <Footer />
     </div>
   );
 };
 
-export default AllEvents;
+export default Dashboard;

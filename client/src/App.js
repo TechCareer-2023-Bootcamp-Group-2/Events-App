@@ -3,6 +3,8 @@ import { Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import EventDetail from "./pages/EventDetail";
 import AllEvents from "./pages/AllEvents";
+import Dashboard from './pages/Dashboard';
+import DashboardDetail from "./pages/DashboardDetail";
 
 function App() {
   return (
@@ -11,6 +13,8 @@ function App() {
         <Route exact path="/" element={<HomePage />} />
         <Route path="/all-events" element={<AllEvents />} />
         <Route path="/eventdetail/:eventId" element={<EventDetail />} />
+        <Route exact path="/dashboard" element={<Dashboard />} />
+        <Route exact path="/dashboard-detail/:eventId" element={<DashboardDetail />} />
       </Routes>
     </>
   );

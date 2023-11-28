@@ -12,42 +12,57 @@ import Footer from "../components/Footer/Footer";
 const slides = [
   {
     id: 1,
-    image:
-      "https://www.telegraph.co.uk/content/dam/music/2022/03/23/TELEMMGLPICT000000290365732_trans_NvBQzQNjv4Bqy81pHNlW26k7kWS-Prb1CvA6hDsX4eDN9gfMVGHPdkQ.jpeg",
-    images: [
-      "https://www.telegraph.co.uk/content/dam/music/2022/03/23/TELEMMGLPICT000000290365732_trans_NvBQzQNjv4Bqy81pHNlW26k7kWS-Prb1CvA6hDsX4eDN9gfMVGHPdkQ.jpeg",
-      "https://www.hanszimmerlive.com/wp-content/uploads/2019/10/Hans-Zimmer-by-Dita-Vollmond-1F0A7217.jpg",
-      "https://www.worldofhanszimmer.com/wp-content/uploads/2018/10/03_HansZimmer_Frank_Embacher_Berlin_print_klein-87.jpg",
+    eventName: "Hamlet",
+    eventType: "Tiyatro",
+    detail: "Ünlü Shakespeare eseri Hamlet'in sahneleneceği tiyatro gösterisi.",
+    startTime: "2023-12-01T00:00:00",
+    endTime: "2023-12-15T00:00:00",
+    place: "Şehir Tiyatrosu",
+    city: "İstanbul",
+    adress: "İstiklal Caddesi No:123, Beyoğlu",
+    googleMapsLink: "https://maps.google.com/?q=41.034,28.985",
+    isPopular: true,
+    ticketPrice: 50,
+    imagesUrl: [
+      "https://www.artfulliving.com.tr/image_data/content/fc3d359a383de694dd2b62b01a9d1457.jpg",
+      "https://media-cdn.t24.com.tr/media/stories/2018/10/raw_hamlet-bale-eseri-olarak-mersinli-sanatseverlerle-bulusuyor_239869767.jpg",
     ],
-    title: "Hans Zimmer Concert",
-    description:
-      "Hurry before tickets for this unforgettable experience sell out!",
-    category: "Concert",
   },
   {
     id: 2,
-    image:
-      "https://www.tennessean.com/gcdn/presto/2019/01/25/PNAS/a2ba5af2-f783-4889-90c0-aba94248128a-Metallica-20190124-01.jpg?crop=3299,1856,x1,y209&width=3200&height=1801&format=pjpg&auto=webp",
-    title: "Metallica Concert",
-    description:
-      "Hurry before tickets for this unforgettable experience sell out!",
-    category: "Concert",
+    eventName: "Osman Hamdi Bey Sergisi",
+    eventType: "Resim",
+    detail: "Osman Hamdi Bey'in eserlerini içeren sergi.",
+    startTime: "2023-11-20T00:00:00",
+    endTime: "2023-12-10T00:00:00",
+    place: "Sanat Galerisi",
+    city: "Ankara",
+    adress: "Sanat Sokak No:45, Çankaya",
+    googleMapsLink: "https://maps.google.com/?q=39.933,32.866",
+    isPopular: true,
+    ticketPrice: 20,
+    imagesUrl: [
+      "https://www.peramuzesi.org.tr/Repo/SliderAndBoxs/osman-hamdi-bey-sergi-3.jpg",
+      "https://www.peramuzesi.org.tr/Repo/SliderAndBoxs/osman-hamdi-bey-sergi-1.jpg",
+    ],
   },
   {
     id: 3,
-    image: "https://www.cide.bel.tr/tema/genel/uploads/haberler/IMG_0270.jpg",
-    title: "Osman Hamdi Bey Theater",
-    description:
-      "Hurry before tickets for this unforgettable experience sell out!",
-    category: "Theater",
-  },
-  {
-    id: 4,
-    image: "https://i.ytimg.com/vi/8C7oJekgxlg/maxresdefault.jpg",
-    title: "Avatar 2 Cinema",
-    description:
-      "Hurry before tickets for this unforgettable experience sell out!",
-    category: "Cinema",
+    eventName: "Rock Festivali",
+    eventType: "Konser",
+    detail: "Birbirinden ünlü rock gruplarının sahne alacağı müzik festivali.",
+    startTime: "2023-11-25T00:00:00",
+    endTime: "2023-12-26T00:00:00",
+    place: "Açık Hava Konser Alanı",
+    city: "İzmir",
+    adress: "Kordon Boyu,Alsancak",
+    googleMapsLink: "https://maps.google.com/?q=38.418,27.128",
+    isPopular: false,
+    ticketPrice: 80,
+    imagesUrl: [
+      "https://static.daktilo.com/sites/302/uploads/2023/10/07/maxresdefault-1.jpg",
+      "https://static.bianet.org/system/uploads/1/articles/spot_image/000/265/708/original/Zeytinli-Rock-Festivali.jpg",
+    ],
   },
 ];
 
@@ -71,12 +86,12 @@ const EventDetail = () => {
         {/* Buradaki slides kısmı düzenlenecek favori resimler yollanacak. */}
         <div className="px-3 md:px-20 lg:px-40">
           <Carousel autoplay className="">
-            {slides[0].images.map((item, index) => (
+            {event.imagesUrl.map((item, index) => (
               <div className="h-[250px] sm:h-[400px] md:h-[600px] rounded-lg" key={index}>
                 <img
                   src={item}
                   alt=""
-                  className="w-full h-full object-cover rounded-lg"
+                  className="w-full h-full object-contain rounded-lg"
                 />
               </div>
             ))}
@@ -84,7 +99,7 @@ const EventDetail = () => {
           <div className="pt-10 pb-5 flex justify-between text-base sm:text-2xl">
             <div className="flex items-center">
               <IoCalendarOutline className="mr-2 text-purple-700" />
-              <span>21.07.2023</span>
+              <span>{event.startTime.substring(0, 10)}</span>
             </div>
             <div className="flex items-center">
               <MdEventSeat className="mr-2 text-purple-700" />
@@ -92,7 +107,7 @@ const EventDetail = () => {
             </div>
             <div className="flex items-center">
               <IoLocationSharp className="mr-2 text-purple-700" />
-              <span>Ankara, Turkey</span>
+              <span>{event.city}, Türkiye</span>
             </div>
           </div>
           <div className="">
@@ -102,7 +117,7 @@ const EventDetail = () => {
             <div className="flex items-center">
               <AiOutlineMenuUnfold className="mr-2 text-purple-700" />
               <div className="flex flex-col text-base">
-                <span className="font-bold">Event Type</span>
+                <span className="font-bold">{event.eventType}</span>
                 <span>{event.category}</span>
               </div>
             </div>
@@ -128,18 +143,10 @@ const EventDetail = () => {
             </div>
             <div className="mb-10">
               <h3 className="text-xl sm:text-3xl font-bold mb-5">
-                Media Companies Need To Better One Then Educate Advertisers.
-                Better One Then Educate.
+                {event.eventName}
               </h3>
               <p className=" sm:text-lg text-gray-400">
-                Cras semper, massa vel aliquam luctus, eros odio tempor turpis,
-                ac placerat metus tortor eget magna. Donec mattis posuere
-                pharetra. Donec vestibulum ornare velit ut sollicitudin.
-                Pellentesque in faucibus purus.Nulla nisl tellus, hendrerit nec
-                dignissim pellentesque, posuere in est. Suspendisse bibendum
-                vestibulum elit eu placerat. In ut ipsum in odio euismod
-                tincidunt non lacinia nunc. Donec ligula augue, mattis eu varius
-                ac.
+                {event.detail}
               </p>
             </div>
           </div>
