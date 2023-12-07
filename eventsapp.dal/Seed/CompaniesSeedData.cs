@@ -1,4 +1,4 @@
-﻿using eventsapp.dal.Data;
+using eventsapp.dal.Data;
 using eventsapp.entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -31,7 +31,7 @@ namespace eventsapp.dal.Seed
                     Phone = "+90 (555) 555 55 55",
                     Mail = "companyname@example.com",
                     CompanyDetails = "Company details company details company details company details company details company details company details company details",
-                    SocialMedia = new List<SocialMedia> { new SocialMedia { Name = "Instagram", Link = "https://www.instagram.com/companyname" }, new SocialMedia { Name = "X", Link = "https://www.twitter.com/companyname" } }
+                    SocialMedia = new List<CompanySocialMedia> { new CompanySocialMedia { Name = "Instagram", Link = "https://www.instagram.com/companyname" }, new CompanySocialMedia { Name = "X", Link = "https://www.twitter.com/companyname" } }
                 });
             }
 

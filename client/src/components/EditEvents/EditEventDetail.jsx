@@ -1,37 +1,40 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Form, Input, Modal, DatePicker, Button, Select, Switch } from "antd";
 import { useForm } from "antd/es/form/Form";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
+import axios from "axios";
 dayjs.extend(customParseFormat);
 const dateFormat = "YYYY/MM/DD";
-
-const categories = [
-  {
-    id: 1,
-    eventType: "Tiyatro",
-  },
-  {
-    id: 2,
-    eventType: "Resim",
-  },
-  {
-    id: 3,
-    eventType: "Konser",
-  },
-];
-
-const EditEventDetail = ({ isModalOpen, setIsModalOpen }) => {
+var exTicketsLenght=0;
+const EditEventDetail = ({ isModalOpen, setIsModalOpen, event, setEvent }) => {
   const [form] = useForm();
-  const [priceDisabled, setPriceDisabled] = useState(false);
+  const [popularDisabled, setPopularDisabled] = useState(false);
+  const [categories, setCategories] = useState([]);
+  const [exTickets,setExTickets]=useState([]);
 
-  // Put işlemini yapacak fonksiyon.
-  const onFinish = (values) => {
+  useEffect(() => {
+    getCategories();
+  }, []);
+  useEffect(() => {
+    setExTickets(event.exTickets);
+    if(event.exTickets.length>0)exTicketsLenght=(event.exTickets[event.exTickets.length-1].id)+1;
+    else exTicketsLenght+=1;
+  }, []);
 
-    // Etkinliğin ücretsiz olması durumunda ticketPrice disabled oluyor ve put işleminde undefined gönderiyordu. Onun kontrolü yapıldı. Sıfır göndermesini söyledim.
-    if (values.ticketPrice === undefined) {
-      values.ticketPrice = "0";
+  const getCategories = async () => {
+    try {
+      axios
+        .get(process.env.REACT_APP_SERVER_URL + "/EventTypes")
+        .then((res) => {
+          setCategories(res.data);
+        });
+    } catch (error) {
+      console.log(error);
     }
+  };
+  // Put işlemini yapacak fonksiyon.
+  const onFinish = async (values) => {
 
     // Ant design kütüphanesinden gelen date formatını veri tabanında sakladığımız şekilde düzenlendi.
     values.startTime = customDateFormat(values.startTime.$d);
@@ -39,34 +42,30 @@ const EditEventDetail = ({ isModalOpen, setIsModalOpen }) => {
 
     // Bu kısımda put işlemi yapılacak.
     console.log(values);
-
-    /*const date1 = values.startTime.$d;
-    const date2 = values.endTime.$d;
-
-    const day1 = date1.getDate(); // Gün
-    const monthIndex1 = date1.getMonth() + 1; // Ayın index'i (0'dan başlar, +1 eklenmeli)
-    const year1 = date1.getFullYear(); // Yıl
-
-    const day2 = date2.getDate(); // Gün
-    const monthIndex2 = date2.getMonth() + 1; // Ayın index'i (0'dan başlar, +1 eklenmeli)
-    const year2 = date2.getFullYear(); // Yıl
-
-    const month1 = monthIndex1 < 10 ? `0${monthIndex1}` : monthIndex1; // Eğer ay tek haneli ise başına 0 ekleniyor
-    const dayStr1 = day1 < 10 ? `0${day1}` : day1;
-
-    const month2 = monthIndex2 < 10 ? `0${monthIndex2}` : monthIndex2; // Eğer ay tek haneli ise başına 0 ekleniyor
-    const dayStr2 = day2 < 10 ? `0${day2}` : day2;
-
-    const newFormat1 = `${year1}-${month1}-${dayStr1}`;
-    const newFormat2 = `${year2}-${month2}-${dayStr2}`;
-
-    console.log(newFormat1, newFormat2);*/
+    try {
+      const response = await axios.patch(process.env.REACT_APP_SERVER_URL + `/Events/Update/${event.id}`, {
+        eventName: values.eventName,
+        eventType: values.eventType,
+        detail: values.detail,
+        startTime: values.startTime,
+        endTime: values.endTime,
+        place: values.place,
+        city: values.city,
+        adress: values.adress,
+        iframe: values.iframe,
+        ticketPrice: values.ticketPrice,
+        isPopular: values.isPopular,
+        exTickets:exTickets
+      })
+      setEvent(response.data);
+    } catch (error) {
+      
+    }
 
     form.resetFields();
   };
-
   // Tarih formatını veri tabanında sakladığımız hale getirmek için kullanılan fonksiyon.
-  const customDateFormat = ( currentDate ) => {
+  const customDateFormat = (currentDate) => {
     const date = currentDate;
 
     const day = date.getDate(); // Gün
@@ -80,12 +79,37 @@ const EditEventDetail = ({ isModalOpen, setIsModalOpen }) => {
 
     return newDateFormat;
   };
-
-  // Etkinliğin ücretsiz olup olmadığını belirlediğimiz componentin değişme fonksiyonu. 
+  // Etkinliğin ücretsiz olup olmadığını belirlediğimiz componentin değişme fonksiyonu.
   const onChangeSwitch = () => {
-    setPriceDisabled(!priceDisabled);
+    setPopularDisabled(!popularDisabled);
   };
-
+  const onAddExTicketsSlot=() => {
+    exTicketsLenght+=1;
+    setExTickets([...exTickets,{id:exTicketsLenght,ticketPrice:0,ticketName:""}]);
+  }
+  const removeExTicketSlot=(id)=>{
+    const updatedExTickets=exTickets.filter((exTicket)=>{return exTicket.id!==id;})
+    setExTickets(updatedExTickets);
+  }
+  const updateTicketName=(index)=>(e)=>{
+    console.log(index);
+    const updatedExTickets=exTickets.map(
+      (item)=>{
+        if(index === item.id){return {id:item.id,ticketPrice:item.ticketPrice,ticketName:e.target.value};}
+        else {return item;}
+      }
+    )
+    setExTickets(updatedExTickets);
+  }
+  const updateTicketPrice=(index)=>(e)=>{
+    const updatedExTickets=exTickets.map(
+      (item)=>{
+        if(index ===item.id){return {id:item.id,ticketPrice:e.target.value,ticketName:item.ticketName};}
+        else {return item;}
+      }
+    )
+    setExTickets(updatedExTickets);
+  }
   return (
     <Modal
       title="Etkinlik Düzenleme"
@@ -93,7 +117,22 @@ const EditEventDetail = ({ isModalOpen, setIsModalOpen }) => {
       open={isModalOpen}
       onCancel={() => setIsModalOpen(false)}
     >
-      <Form layout={"vertical"} onFinish={onFinish} form={form}>
+      <Form
+        layout={"vertical"}
+        onFinish={onFinish}
+        form={form}
+        initialValues={{
+          eventType: event.eventType,
+          eventName: event.eventName,
+          detail: event.detail,
+          city: event.city,
+          adress: event.adress,
+          place: event.place,
+          iframe: event.iframe,
+          ticketPrice: event.ticketPrice,
+          isPopular: event.isPopular,
+        }}
+      >
         <Form.Item
           label="Kategori"
           rules={[{ required: true }]}
@@ -209,8 +248,9 @@ const EditEventDetail = ({ isModalOpen, setIsModalOpen }) => {
         >
           <Input placeholder="Google Maps Iframe linkini giriniz.." />
         </Form.Item>
-        <Form.Item name={"free"} label="Ücretsiz" valuePropName="checked">
+        <Form.Item name={"isPopular"} label="Popüler Etkinlik" valuePropName="checked">
           <Switch
+            defaultChecked={popularDisabled}
             className="ant-switch-inner-unchecked"
             onChange={onChangeSwitch}
           />
@@ -218,9 +258,62 @@ const EditEventDetail = ({ isModalOpen, setIsModalOpen }) => {
         <Form.Item label="Bilet Fiyatı" name={"ticketPrice"}>
           <Input
             placeholder="Etkinlik bilet fiyatını giriniz.."
-            disabled={priceDisabled}
           />
         </Form.Item>
+        <div name="exticket" className={"mb-5"}>
+        {exTickets.map((ticket) =>( 
+          <div name={"exticketitem"} className={"flex justify-between"} key={ticket.id}>
+              <Form.Item
+                label="Özel Bilet İsmi"
+                name={"exticketname-"+ticket.id}
+                className="px-2"
+                initialValue={ticket.ticketName}
+                rules={[
+                  {
+                    required: true,
+                    message: "Bilet ismi boş geçemezsiniz.",
+                  },
+                ]}
+              >
+                <Input
+                placeholder="Bilet ismi giriniz."
+                onChange={updateTicketName(ticket.id)}
+              />
+              </Form.Item>
+              <Form.Item
+                label="Özel Bilet Fiyatı"
+                name={"exticketprice-"+ticket.id}
+                className="px-2"
+                initialValue={ticket.ticketPrice}
+                rules={[
+                  {
+                    required: true,
+                    message: "Bilet fiyatı boş geçemezsiniz.",
+                  },
+                ]}
+              >
+                <Input
+                placeholder="Bilet fiyatı giriniz."
+                onChange={updateTicketPrice(ticket.id)}
+              />
+              </Form.Item>
+              <div className={"flex items-center"}>
+              <Button size="large" onClick={()=>removeExTicketSlot(ticket.id)}>
+              Sil
+              </Button>
+              </div>
+              
+          </div>
+          ))
+        }
+         
+          <div name={"exticketaddbutton"} className={"relative h-10"}>
+          <Button size="large" className={"absolute inset-y-0 right-3"} onClick={(onAddExTicketsSlot)}>
+            Ekle
+          </Button>
+          </div>
+          
+        </div>
         <Button htmlType="submit" size="large">
           Kaydet
         </Button>

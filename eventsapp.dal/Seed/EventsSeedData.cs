@@ -18,11 +18,6 @@ namespace eventsapp.dal.Seed
             using (var ctx = new EventsDBContext(serviceProvider.GetRequiredService<DbContextOptions<EventsDBContext>>()))
             {
                 if (ctx.Events.Any()) return;
-                Console.WriteLine("Events Seeding");
-                Console.WriteLine("Events Seeding");
-                Console.WriteLine("Events Seeding");
-                Console.WriteLine("Events Seeding");
-
                 SeedData(ctx);
             }
         }
@@ -43,8 +38,9 @@ namespace eventsapp.dal.Seed
                     GoogleMapsLink = "https://maps.google.com/?q=41.034,28.985",
                     TicketPrice = 50.00f,
                     isPopular = true,
-                    Images = new List<EventImages>{new EventImages{imageUrl="https://www.artfulliving.com.tr/image_data/content/fc3d359a383de694dd2b62b01a9d1457.jpg"},
-                    new EventImages{imageUrl="https://media-cdn.t24.com.tr/media/stories/2018/10/raw_hamlet-bale-eseri-olarak-mersinli-sanatseverlerle-bulusuyor_239869767.jpg"},},
+                    Images = new List<EventImages>{},
+                    //new EventImages{ImageName="https://www.artfulliving.com.tr/image_data/content/fc3d359a383de694dd2b62b01a9d1457.jpg"},
+                    //new EventImages{ImageName="https://media-cdn.t24.com.tr/media/stories/2018/10/raw_hamlet-bale-eseri-olarak-mersinli-sanatseverlerle-bulusuyor_239869767.jpg"},
                     //PicturesUrl=new List<string>{ "https://example.com/hamlet1.jpg", "https://example.com/hamlet2.jpg"}
                 });
                 events.Add(new Events
@@ -60,8 +56,9 @@ namespace eventsapp.dal.Seed
                     GoogleMapsLink = "https://maps.google.com/?q=39.933,32.866",
                     TicketPrice = 20.00f,
                     isPopular = true,
-                    Images = new List<EventImages>{new EventImages{imageUrl="https://www.peramuzesi.org.tr/Repo/SliderAndBoxs/osman-hamdi-bey-sergi-3.jpg"},
-                    new EventImages{imageUrl="https://www.peramuzesi.org.tr/Repo/SliderAndBoxs/osman-hamdi-bey-sergi-1.jpg"},},
+                    Images = new List<EventImages>{},
+                    //new EventImages{ImageName="https://www.peramuzesi.org.tr/Repo/SliderAndBoxs/osman-hamdi-bey-sergi-3.jpg"},
+                    //new EventImages{ImageName="https://www.peramuzesi.org.tr/Repo/SliderAndBoxs/osman-hamdi-bey-sergi-1.jpg"},
                     //PicturesUrl=new List<string>{ "https://example.com/osman_hamdi1.jpg", "https://example.com/osman_hamdi2.jpg"}
 
                 });
@@ -78,18 +75,19 @@ namespace eventsapp.dal.Seed
                     GoogleMapsLink = "https://maps.google.com/?q=38.418,27.128",
                     TicketPrice = 80.00f,
                     isPopular = false,
-                    Images = new List<EventImages>{new EventImages{imageUrl="https://static.daktilo.com/sites/302/uploads/2023/10/07/maxresdefault-1.jpg"},
-                    new EventImages{imageUrl="https://static.bianet.org/system/uploads/1/articles/spot_image/000/265/708/original/Zeytinli-Rock-Festivali.jpg"},},
+                    Images = new List<EventImages>{},
+                    //new EventImages{ImageName="https://static.daktilo.com/sites/302/uploads/2023/10/07/maxresdefault-1.jpg"},
+                    //new EventImages{ImageName="https://static.bianet.org/system/uploads/1/articles/spot_image/000/265/708/original/Zeytinli-Rock-Festivali.jpg"},
                     //PicturesUrl=new List<string>{ "https://example.com/rock_festival1.jpg","https://example.com/rock_festival2.jpg"}
                 });
             }
             foreach (var item in events) ctx.Events.Add(item);
             ctx.SaveChanges();
         }
-        private static EventTypes GetEventType(string eventName, EventsDBContext ctx)
-        {
-            return ctx.EventTypes.Where(i => i.EventType == eventName).FirstOrDefault();
-        }
+        // private static EventTypes GetEventType(string eventName, EventsDBContext ctx)
+        // {
+        //     return ctx.EventTypes.Where(i => i.EventType == eventName).FirstOrDefault();
+        // }
     }
 
 }

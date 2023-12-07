@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import '../../index.css';
 
 const Header = () => {
   const { pathname } = useLocation();
@@ -32,7 +33,7 @@ const Header = () => {
       </div>
 
       {/* Mobil Ekran için menü butonu kısmı */}
-      <div className="md:hidden">
+      <div className="header-container md:hidden">
         {/* Mobil ekran menüsü için */}
         <button onClick={toggleMenu} className="text-[18px] focus:outline-none">
           Menu

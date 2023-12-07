@@ -1,8 +1,8 @@
 ﻿namespace eventsapp.entity
 {
-    public class SocialMedia : BaseEntity
+    public class EventsSocialMedia : BaseEntity
     {
-        public virtual Companies Companies { get; set; }
+        public virtual Events Event{get;set;}
         public string? Name { get; set; }
         public string? Link { get; set; }
     }

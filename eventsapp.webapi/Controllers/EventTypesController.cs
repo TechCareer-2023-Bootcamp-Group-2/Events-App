@@ -3,12 +3,14 @@ using AutoMapper;
 using eventsapp.bll.Abstract;
 using eventsapp.entity;
 using eventsapp.webapi.Models;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eventsapp.webapi.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [EnableCors("OpenCORSPolicy")]
     public class EventTypesController : ControllerBase
     {
 
@@ -25,7 +27,7 @@ namespace eventsapp.webapi.Controllers
             return Ok(_mapper.Map<List<EventTypesModel>>(await _eventTypesService.GetAsync()));
         }
 
-        [HttpPost]
+        [HttpPost("Add")]
 
         public async Task<IActionResult> Post(EventTypesCreateModel model){
             if(ModelState.IsValid){

@@ -13,6 +13,8 @@ namespace eventsapp.bll.Concrete
 
         public async Task<bool> AddAsync(Events entity)
         {
+            EventTypes eventType=await _unitofWork.EventTypesRepo.GetByEventTypeNameAsync(entity.EventType.EventType);
+            if(eventType!=null)entity.EventType=eventType;
             await _unitofWork.EventsRepo.AddAsync(entity);
             return Validation(entity);
         }

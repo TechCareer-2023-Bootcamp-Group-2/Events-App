@@ -16,6 +16,8 @@ namespace eventsapp.entity
         public float? TicketPrice { get; set; }
         public bool? isPopular {get;set;}
         public virtual ICollection<EventImages>? Images { get; set; }
+        public virtual ICollection<EventsSocialMedia>? SocialMedia { get; set; }
+        public virtual ICollection<ExTicket>? ExTickets { get; set; }
         public virtual EventTypes? EventType
         {
             get;

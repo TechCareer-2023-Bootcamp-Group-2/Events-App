@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+﻿﻿using AutoMapper;
 using eventsapp.entity;
 using eventsapp.webapi.Models;
 
@@ -14,7 +14,7 @@ namespace eventsapp.webapi.Mapper
 
             CreateMap<CompaniesCreateModel, Companies>()
                 .ForMember(dest => dest.Id, opt => opt.Ignore())
-                .ForMember(dest => dest.SocialMedia, opt => opt.MapFrom(src => src.SocialMedia.Select(sm => new SocialMedia { Name = sm.Name, Link = sm.Link }).ToList()));
+                .ForMember(dest => dest.SocialMedia, opt => opt.MapFrom(src => src.SocialMedia.Select(sm => new SocialMediaModel { Name = sm.Name, Link = sm.Link }).ToList()));
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace eventsapp.webapi.Models
+﻿﻿namespace eventsapp.webapi.Models
 {
     public class CompaniesCreateModel
     {

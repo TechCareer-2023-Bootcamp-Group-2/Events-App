@@ -2,8 +2,11 @@ namespace eventsapp.dal.Abstract
 {
     public interface IUnitOfWork
     {
-        IEventsRepository EventsRepo { get; }
-        IEventTypesRepitory EventTypesRepo { get; }
-        ICompanyRepository CompanyRepo { get; }
+        IEventImagesRepository EventImagesRepo{get;}
+        IEventsRepository EventsRepo{get;}
+        IEventTypesRepitory EventTypesRepo{get;}
+
+        ICompanyRepository CompanyRepo{get;}
+     
     }
 }

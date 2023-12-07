@@ -25,9 +25,9 @@ namespace eventsapp.webapi
             //Start with "builder." in program.cs, set here: 
             services.AddCors(options =>
             {
-                options.AddPolicy(name: "myOrigins", policy =>
+                options.AddPolicy(name: "OpenCORSPolicy", policy =>
                 {
-                    policy.AllowAnyOrigin(); // www.deneme.com
+                    policy.AllowAnyOrigin(); 
                     policy.AllowAnyHeader();
                     policy.AllowAnyMethod();
                 });
@@ -35,12 +35,16 @@ namespace eventsapp.webapi
             services.AddControllers();
             services.AddSwaggerGen();
             services.AddAutoMapper(typeof(Program));
+            //services.AddDbContext<EventsDBContext>(options =>
+            //                                            options.UseLazyLoadingProxies().UseMySQL(
+            //                                                Configuration.GetConnectionString("default")));
             services.AddDbContext<EventsDBContext>(options =>
-                                                        options.UseLazyLoadingProxies().UseMySQL(
+                                                        options.UseLazyLoadingProxies().UseSqlServer(
                                                             Configuration.GetConnectionString("default")));
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IEventsService, EventsService>();
             services.AddTransient<IEventTypesService, EventTypesService>();
+            services.AddTransient<IEventImagesService, EventImagesService>();
             services.AddTransient<ICompaniesService, CompaniesService>();
         }
 
@@ -64,8 +68,8 @@ namespace eventsapp.webapi
             app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseRouting();
-            app.UseCors("myOrigins");
-
+            app.UseCors("OpenCORSPolicy");
+            app.UseStaticFiles();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

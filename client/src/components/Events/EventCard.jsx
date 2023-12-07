@@ -3,12 +3,13 @@ import {IoCalendarOutline, IoLocationSharp} from 'react-icons/io5';
 import {FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn} from 'react-icons/fa';
 import { Link } from "react-router-dom";
 
+
 const EventCard = ({ item }) => {
   return (
     <div className="w-full md:w-[300px] lg:w-[320px] h-auto flex flex-col bg-white my-3 mx-auto rounded-md
       shadow-lg shadow-black/[0.1]"
     >
-      <img src={item.imagesUrl[0]} alt={item.eventName} className="rounded-md h-[200px] w-full object-cover" />
+      <img src={process.env.REACT_APP_SERVER_URL +"/EventImages?id="+item.imagesUrl[0]} alt={item.eventName} className="rounded-md h-[200px] w-full object-cover" />
       <div className="flex justify-between mx-5 my-5">
         <div className="flex items-center">
           <IoCalendarOutline className="mr-2 text-purple-700" />

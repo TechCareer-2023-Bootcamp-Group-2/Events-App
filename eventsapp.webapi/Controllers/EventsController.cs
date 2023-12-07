@@ -1,17 +1,18 @@
 using System.Net;
 using AutoMapper;
 using eventsapp.bll.Abstract;
-using eventsapp.dal.Abstract;
 using eventsapp.entity;
 using eventsapp.webapi.Models;
-using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+
 
 namespace eventsapp.webapi.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [EnableCors("OpenCORSPolicy")]
 
     public class EventsController : ControllerBase
     {
@@ -31,6 +32,14 @@ namespace eventsapp.webapi.Controllers
             return Ok(_mapper.Map<List<EventsModel>>(await _eventsService.GetAsync()));
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(int id)
+        {
+            var eventData=await _eventsService.GetAsync(id);
+            if(eventData==null)return Ok(HttpStatusCode.BadRequest);
+            return Ok(_mapper.Map<EventsModel>(eventData));
+        }
+
         [HttpGet("Popular")]
         public async Task<IActionResult> GetPopular()
         {
@@ -41,29 +50,36 @@ namespace eventsapp.webapi.Controllers
         {
             return Ok(_mapper.Map<List<EventsModel>>(await _eventsService.GetByEventTypeAsync(CategoryName)));
         }
-        [HttpPost]
+        [HttpPost("Add")]
 
         public async Task<IActionResult> Post(EventsCreateModel model){
             if(ModelState.IsValid){
-                Console.WriteLine(model.ImagesUrl[0]);
                 var newEvents=_mapper.Map<Events>(model);
                 await _eventsService.AddAsync(newEvents);
-        
+                return Ok(5);
             }
             return Ok(HttpStatusCode.BadRequest);
         }
-        [HttpPut("{id}")]
+        [HttpPatch("Update/{id}")]
 
-        public async Task<IActionResult> PutEvents(int id,EventsCreateModel model)
+        public async Task<IActionResult> PatchEvents(int id,EventsCreateModel model)
         {
-            Events events;
-            try{
-                events=await _eventsService.GetAsync(id);
-            }catch(Exception e){
-                return Ok(HttpStatusCode.BadRequest);
-            }
+            Events events=await _eventsService.GetAsync(id);
+            if(events==null)return Ok(HttpStatusCode.BadRequest);
+            //TODO Fix mapper
+            EventTypes eventType=events.EventType;
             events=_mapper.Map(model,events);
+            if(model.EventType==null||model.EventType==eventType.EventType)events.EventType=eventType;
             await _eventsService.UpdateAsync(events);
+            return Ok();
+        }
+         [HttpDelete("Delete/{id}")]
+
+        public async Task<IActionResult> PatchDelete(int id)
+        {
+            Events events=await _eventsService.GetAsync(id);
+            if(events==null)return Ok(HttpStatusCode.BadRequest);
+            await _eventsService.DeleteAsync(events);
             return Ok();
         }
 

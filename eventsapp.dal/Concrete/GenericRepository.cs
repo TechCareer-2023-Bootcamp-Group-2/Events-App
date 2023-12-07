@@ -54,7 +54,7 @@ namespace eventsapp.dal.Abstract
             if (entity != null)
                 return entity;
 
-            throw new NotImplementedException();
+            return null;
         }
         public async Task<T> UpdateAsync(T entity)
         {

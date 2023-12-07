@@ -2,13 +2,7 @@
 
 namespace eventsapp.bll.Abstract
 {
-    public interface ICompaniesService : IValidator<Companies>
+    public interface ICompaniesService : IValidator<Companies>,IService<Companies,int>
     {
-        Task<bool> AddAsync(Companies entity);
-        Task<bool> DeleteAsync(int id);
-        Task<bool> DeleteAsync(Companies entity);
-        Task<IEnumerable<Companies>> GetAsync();
-        Task<Companies> GetAsync(int id);
-        Task<bool> UpdateAsync(Companies entity);
     }
 }
