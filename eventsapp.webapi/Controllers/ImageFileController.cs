@@ -41,7 +41,6 @@ namespace eventsapp.webapi.Controllers
             using (var stream = new MemoryStream())
             {
                 await file.CopyToAsync(stream);
-                Console.WriteLine(stream.Length);
                 var img = new EventImages
                 {
                     Event = eventData,
