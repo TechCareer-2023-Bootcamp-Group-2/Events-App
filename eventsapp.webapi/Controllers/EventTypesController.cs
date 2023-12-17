@@ -3,6 +3,7 @@ using AutoMapper;
 using eventsapp.bll.Abstract;
 using eventsapp.entity;
 using eventsapp.webapi.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,12 +29,13 @@ namespace eventsapp.webapi.Controllers
         }
 
         [HttpPost("Add")]
+        [Authorize]
 
         public async Task<IActionResult> Post(EventTypesCreateModel model){
             if(ModelState.IsValid){
                 var newEventType=_mapper.Map<EventTypes>(model);
                 await _eventTypesService.AddAsync(newEventType);
-        
+                return Ok();
             }
             return Ok(HttpStatusCode.BadRequest);
         }

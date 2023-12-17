@@ -3,6 +3,7 @@ using AutoMapper;
 using eventsapp.bll.Abstract;
 using eventsapp.entity;
 using eventsapp.webapi.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -51,6 +52,7 @@ namespace eventsapp.webapi.Controllers
             return Ok(_mapper.Map<List<EventsModel>>(await _eventsService.GetByEventTypeAsync(CategoryName)));
         }
         [HttpPost("Add")]
+        [Authorize]
 
         public async Task<IActionResult> Post(EventsCreateModel model){
             if(ModelState.IsValid){
@@ -61,6 +63,7 @@ namespace eventsapp.webapi.Controllers
             return Ok(HttpStatusCode.BadRequest);
         }
         [HttpPatch("Update/{id}")]
+        [Authorize]
 
         public async Task<IActionResult> PatchEvents(int id,EventsCreateModel model)
         {
@@ -73,7 +76,8 @@ namespace eventsapp.webapi.Controllers
             await _eventsService.UpdateAsync(events);
             return Ok();
         }
-         [HttpDelete("Delete/{id}")]
+        [HttpDelete("Delete/{id}")]
+        [Authorize]
 
         public async Task<IActionResult> PatchDelete(int id)
         {

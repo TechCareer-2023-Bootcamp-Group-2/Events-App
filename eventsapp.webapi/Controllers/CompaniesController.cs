@@ -2,6 +2,7 @@
 using eventsapp.bll.Abstract;
 using eventsapp.entity;
 using eventsapp.webapi.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
@@ -40,6 +41,7 @@ namespace eventsapp.webapi.Controllers
         // }
 
         [HttpPatch]
+        [Authorize]
         public async Task<IActionResult> Patch(CompaniesCreateModel model)
         {
             Companies companies = await _companiesService.GetAsync(1);

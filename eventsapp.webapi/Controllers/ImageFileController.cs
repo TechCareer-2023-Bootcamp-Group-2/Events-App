@@ -4,6 +4,7 @@ using eventsapp.entity;
 using eventsapp.webapi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace eventsapp.webapi.Controllers
@@ -31,6 +32,7 @@ namespace eventsapp.webapi.Controllers
             return File(dbData.Image, dbData.ImageType);
         }
         [HttpPost("Upload")]
+        [Authorize]
         public async Task<IActionResult> Post([FromForm] ImageModel model)
         {
             var file=model.file;
@@ -55,6 +57,7 @@ namespace eventsapp.webapi.Controllers
         }
 
         [HttpDelete("Delete/{id}")]
+        [Authorize]
         public async Task<IActionResult> DeleteImage(int id){
             var deleteImage=await _eventImagesService.GetAsync(id);
             if(deleteImage==null)return Ok(HttpStatusCode.BadRequest);

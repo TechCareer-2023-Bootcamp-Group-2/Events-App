@@ -5,7 +5,12 @@ using eventsapp.dal.Abstract;
 using eventsapp.dal.Concrete;
 using eventsapp.dal.Data;
 using eventsapp.dal.Seed;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Filters;
+using System.Text;
 
 namespace eventsapp.webapi
 {
@@ -33,7 +38,30 @@ namespace eventsapp.webapi
                 });
             });
             services.AddControllers();
-            services.AddSwaggerGen();
+            services.AddSwaggerGen(options =>
+            {
+                options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+                {
+                    In = ParameterLocation.Header,
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey
+                });
+                options.OperationFilter<SecurityRequirementsOperationFilter>();
+            });
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = Configuration["Jwt:Issuer"],
+                    ValidAudience = Configuration["Jwt:Issuer"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
+                };
+            });
             services.AddAutoMapper(typeof(Program));
             //services.AddDbContext<EventsDBContext>(options =>
             //                                            options.UseLazyLoadingProxies().UseMySQL(
@@ -46,6 +74,7 @@ namespace eventsapp.webapi
             services.AddTransient<IEventTypesService, EventTypesService>();
             services.AddTransient<IEventImagesService, EventImagesService>();
             services.AddTransient<ICompaniesService, CompaniesService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -66,10 +95,11 @@ namespace eventsapp.webapi
             }
             //Start with "app." in program.cs, set here: 
             app.UseHttpsRedirection();
-            app.UseAuthentication();
+            app.UseStaticFiles();
             app.UseRouting();
             app.UseCors("OpenCORSPolicy");
-            app.UseStaticFiles();
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
