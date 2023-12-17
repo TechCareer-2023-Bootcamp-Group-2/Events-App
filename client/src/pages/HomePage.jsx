@@ -13,12 +13,23 @@ const HomePage = () => {
   const [events, setEvents] = useState([]);
   const [popularEvents, setPopularEvents] = useState(null);
   const [categories, setCategories] = useState([]);
+  const [company, setCompany] = useState([]);
 
   const getEvents = async () => {
     console.log(process.env.REACT_APP_SERVER_URL);
     try {
       axios.get(process.env.REACT_APP_SERVER_URL + "/Events").then((res) => {
         setEvents(res.data);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const getCompany = async () => {
+    console.log(process.env.REACT_APP_SERVER_URL);
+    try {
+      axios.get(process.env.REACT_APP_SERVER_URL + "/Companies").then((res) => {
+        setCompany(res.data);
       });
     } catch (error) {
       console.log(error);
@@ -49,6 +60,7 @@ const HomePage = () => {
     getEvents();
     getCategories();
     getPopularEvents();
+    getCompany();
   }, []);
 
   return (
@@ -83,7 +95,8 @@ const HomePage = () => {
         categories={categories}
         events={events}
       />
-      <Footer />
+      <Footer 
+      company={company[0]}/>
     </div>
   );
 };

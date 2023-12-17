@@ -8,7 +8,6 @@ const { RangePicker } = DatePicker;
 
 const EventSearch = ({ setSearch, events, setFiltered }) => {
   const [switchValue, setSwitchValue] = useState(false);
-
   // Tarihi geçmiş etkinlikleri listele.
   const onChangeSwitch = (value) => {
     setSwitchValue(value);
